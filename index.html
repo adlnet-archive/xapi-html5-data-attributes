@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+	<meta name="author" content="Tyler Mulligan">
+	<title>xAPI statements in HTML5 data-attributes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet" type="text/css" />
+	<style type="text/css" media="screen">
+		#editor { 
+			width:530px;
+			height:460px;
+			border:1px solid #ccc;
+			margin-bottom:10px;
+		}
+		.tab-content {
+			border:1px solid #ccc;
+			border-top:0;
+			padding:15px 5px 5px;
+		}
+		.tooltip-inner {
+			max-width: 350px;
+		}
+	</style>
+	<!--[if lt IE 9]>
+	  <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+        
+<div class="container">
+	<div class="page-header">
+	  <h1 class="text-primary">xAPI HTML5 data-attributes</h1>
+	  <h3 class="text-muted">Using jQuery to send statements written in markup to a Learning Record Store (LRS)</h3>
+	</div>
+
+	<h2 class="text-info">About</h2>
+	<div class="alert alert-success">
+		<p>This tool demonstrates the use of xAPI statements within markup using HTML5 data-attributes. Example JSON is available in an external <a href="js/statements.js" target="_blank">statements.js <i class="glyphicon glyphicon-file"></i></a> file for your convenience. Inline JSON examples are also provided.</p>
+		<p><span class="label label-info">Tip: Open your browser's developer tools (F12) to see more info in the console.</span></p>
+	</div>
+
+	<h2 class="text-info">Using the Tool</h2>
+	<h3>Choose an LRS to send statements to</h3>
+	<p>Configuration to these LRSes can be found in the <a href="js/conf.js" target="_blank">conf.js <i class="glyphicon glyphicon-file"></i></a> file.</p>
+    <p>The ADL LRS should always work with these examples. Other LRSes may not work without having logged into through your browser. It's possible to fork this demo, enter your own credentials to one of those systems and have it work.</p>
+	<div class="btn-toolbar" role="toolbar">
+	  <div id="change-lrs" class="btn-group">
+		<a class="btn btn-default active" rel="adl"><span class="glyphicon glyphicon-heart"></span> ADL LRS</a>
+		<a class="btn btn-default" rel="wax"><span class="glyphicon glyphicon-comment"></span> Wax LRS</a>
+		<a class="btn btn-default" rel="watershed"><span class="glyphicon glyphicon-tint"></span> Watershed LRS</a>
+		<a class="btn btn-default" rel="scormcloud"><span class="glyphicon glyphicon-cloud"></span> SCORM Cloud</a>
+		<a class="btn btn-default" rel="learninglocker"><span class="glyphicon glyphicon-lock"></span> Learning Locker</a>
+	  </div>
+	</div>
+
+<div class="row">
+<div class="col-lg-6">
+    <h3>Send a Statement</h3>
+	<p>There are multiple ways to send statements to your chosen LRS.</p>
+	<!-- tabs -->
+	<div class="tabbable">
+	  <ul class="nav nav-tabs">
+		<li class="active"><a href="#tab-predefined" data-toggle="tab">Predefined JSON</a></li>
+		<li><a href="#tab-events" data-toggle="tab">Custom Events</a></li>
+		<li><a href="#tab-editor" data-toggle="tab">JSON Editor</a></li>
+	  </ul>
+	  <div class="tab-content">
+		<div class="tab-pane active" id="tab-predefined">
+			<p>The links below contain data-xapi-statement attributes that will send an xAPI statement to the LRS you've chosen above when clicked. If you hover the link, a tooltip should display the value of the data-xapi-statement attribute. the <em class="text-info">stmt[0-9]+</em> is a reference to a javascript variable defined in the <a href="js/statements.js" target="_blank">statements.js <i class="glyphicon glyphicon-file"></i></a> file.</p>
+			<table id="send-statement" class="table table-hover">
+			  <thead>
+				<tr>
+				  <th>Verb</th>
+				  <th>Type</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt1" data-toggle="tooltip" title='data-xapi-statement="stmt1"'>answered</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt2" data-toggle="tooltip" title='data-xapi-statement="stmt2"'>attempted</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt3" data-toggle="tooltip" title='data-xapi-statement="stmt3"'>attended</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt4" data-toggle="tooltip" title='data-xapi-statement="stmt4"'>completed</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt5" data-toggle="tooltip" title='data-xapi-statement="stmt5"'>created</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt6" data-toggle="tooltip" title='data-xapi-statement="stmt6"'>experienced</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt7" data-toggle="tooltip" title='data-xapi-statement="stmt7"'>failed</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt8" data-toggle="tooltip" title='data-xapi-statement="stmt8"'>imported</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt9" data-toggle="tooltip" title='data-xapi-statement="stmt9"'>interacted</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement="stmt10" data-toggle="tooltip" title='data-xapi-statement="stmt10"'>passed</a></td>
+				  <td>javascript variable from statements.js</td>
+				</tr>
+				<tr>
+				  <td><a href="#" data-xapi-statement='{"actor":{"mbox":"mailto:tyler.mulligan.ctr@adlnet.gov","name":"Tyler Mulligan","objectType":"Agent"},"verb":{"id":"http://adlnet.gov/expapi/verbs/shared","display":{"en-US":"shared"}},"object":{"id":"http://z2.vc/xapi/activities/shared","objectType":"Activity","definition":{"name":{"en-US":"shared HTML5 data attribute"},"description":{"en-US":"Example generation of a shared activity using an HTML5 data attribute with unobtrusive js"}}}}' data-toggle="tooltip" title='data-xapi-statement=&#39;{"actor":{"mbox":"mailto:tyler.mulligan.ctr@adlnet.gov","name":"Tyler Mulligan","objectType":"Agent"},"verb":{"id":"http://adlnet.gov/expapi/verbs/shared","display":{"en-US":"shared"}},"object":{"id":"http://z2.vc/xapi/activities/shared","objectType":"Activity","definition":{"name":{"en-US":"shared HTML5 data attribute"},"description":{"en-US":"Example generation of a shared activity using an HTML5 data attribute with unobtrusive js"}}}}&#39;'>shared</a></td>
+				  <td>inline JSON</td>
+				</tr>
+			  </tbody>
+			</table>
+		</div>
+		<div class="tab-pane" id="tab-events">
+			<p class="text-danger"><b>VERY</b> experimental custom event binding.</p>
+			<h5>On Change</h5>
+			<p>Select an option below to send a statement:</p>
+			<select data-xapi-change-event="change" id="test">
+                <option data-xapi-statement="stmt3">stmt3</option>
+                <option data-xapi-statement="stmt4">stmt4</option>
+                <option data-xapi-statement='{"actor":{"mbox":"mailto:custom-statement@adlnet.gov","name":"Custom","objectType":"Agent"},"verb":{"id":"http://adlnet.gov/expapi/verbs/passed","display":{"en-US":"passed"}},"object":{"id":"http://z2.vc/xapi/activities/passed-a-custom-event","objectType":"Activity","definition":{"name":{"en-US":"a statement with a custom event on change"},"description":{"en-US":"passed a custom statement with a custom on change event"}}}}'>inline statement</option>
+            </select>
+            <br />
+            <br />
+            <h5>On Hover</h5>
+			<p><a href="#" data-xapi-hover-event="hover" data-xapi-statement="stmt2">hover me to send <em class="text-info">stmt2</em></a></p>
+		</div>
+		<div class="tab-pane" id="tab-editor">
+			<p>This editor allows you to send a custom statement to the LRS you've chosen above.</p>
+<div id="editor">{
+	"actor": {
+		"mbox": "mailto:custom-statement@adlnet.gov",
+		"name": "Custom",
+		"objectType": "Agent"
+	},
+	"verb": {
+		"id": "http://adlnet.gov/expapi/verbs/passed",
+		"display": {
+			"en-US": "passed"
+		}
+	},
+	"object": {
+		"id": "http://z2.vc/xapi/activities/passed-the-editor",
+		"objectType": "Activity",
+		"definition": {
+			"name": {
+				"en-US": "statement from Tyler's editor"
+			},
+			"description": {
+				"en-US": "passed a custom statement from Tyler's editor"
+			}
+		}
+	}
+}</div>
+		<p><a id="send-custom-statement" class="btn btn-primary" data-xapi-statement="custom-statement" href="#">Send Custom Statement <i class="glyphicon glyphicon-share-alt"></i></a></p>
+		<p><a href="http://tincanapi.com/statement-generator/" target="_blank">you can generate a valid statement here <i class="glyphicon glyphicon-new-window"></i></a></p>
+		</div>
+	   </div>
+	</div>
+	<!-- /tabs -->
+</div><!-- .col-md-6 -->
+<div class="col-lg-6">
+		<h3>Statement Information</h3>
+        <p>Statements sent to the LRS, and response status from the LRS are displayed here.</p>
+	<div class="well">
+		<p id="lrs-response"></p>
+		<pre class="prettyprint lang-js" id="statement"></pre>
+
+		<p>You can view statements sent to the ADL LRS <a href="https://lrs.adlnet.gov/prototypes/StatementViewer/index.html" target="_blank">here <i class="glyphicon glyphicon-new-window"></i></a>.</p>
+	</div>
+</div><!-- .col-md-6 -->
+</div><!-- .row -->
+
+    <h2 class="text-info">Technical Explanation</h2>
+	<p>xAPI statement data is included as a JSON object in a data-xapi-statement attribute</p>
+	<!-- tabs -->
+	<div class="tabbable">
+	  <ul class="nav nav-tabs">
+		<li class="active"><a href="#tab-html" data-toggle="tab">HTML</a></li>
+		<li><a href="#tab-json" data-toggle="tab">JSON</a></li>
+		<li><a href="#tab-jquery" data-toggle="tab">jQuery</a></li>
+	  </ul>
+	  <div class="tab-content">
+		<div class="tab-pane active" id="tab-html">
+			<p><em class="text-info">stmt1</em> is actually a javascript variable that you can see in the JSON tab.</p>
+<pre class="prettyprint lang-html">&lt;a data-xapi-statement="stmt1" href="#"&gt;answered&lt;/a&gt;</pre>
+			<p>Alternatively, <a href="http://jsonmate.com/" target="_blank">uglified JSON <i class="glyphicon glyphicon-new-window"></i></a> can be put directly into the data-xapi-statement attribute</p>
+<pre class="prettyprint lang-html">&lt;a data-xapi-statement='{"actor":{"mbox":"mailto:tyler.mulligan.ctr@adlnet.gov","name":"Tyler Mulligan","objectType":"Agent"},"verb":{"id":"http://adlnet.gov/expapi/verbs/shared","display":{"en-US":"shared"}},"object":{"id":"http://z2.vc/xapi/activities/shared","objectType":"Activity","definition":{"name":{"en-US":"shared HTML5 data attribute"},"description":{"en-US":"Example generation of a shared activity using an HTML5 data attribute with unobtrusive js"}}}}' href="#"&gt;shared&lt;/a&gt;</pre>
+		</div>
+		<div class="tab-pane" id="tab-json">
+			<p>This is an example of a JSON variable referenced by the data-xapi-statement attribute in the HTML.</p>
+<pre class="prettyprint lang-js">
+var stmt1 = {
+	"actor": {
+		"mbox": "mailto:" + email,
+		"name": email,
+		"objectType": "Agent"
+	},
+	"verb": {
+		"id": "http://adlnet.gov/expapi/verbs/answered",
+		"display": {
+			"en-US": "answered"
+		}
+	},
+	"object": {
+		"id": "http://z2.vc/xapi/activities/answered",
+		"objectType": "Activity",
+		"definition": {
+			"name": {
+				"en-US": "HTML5 data attribute prototype"
+			},
+			"description": {
+				"en-US": "Example generation of a answered activity using an HTML5 data attribute with unobtrusive js"
+			}
+		}
+	}
+};</pre>
+		</div>
+		<div class="tab-pane" id="tab-jquery">
+			<p>In this prototype, jQuery binds the click event, references the data-xapi-statement makes sense of it and sends it to an LRS using <a href="https://github.com/adlnet/xAPIWrapper" target="_blank">xapiwrapper.js <i class="glyphicon glyphicon-new-window"></i></a></p>
+<pre class="prettyprint lang-js">
+$('#send-statement a').click(function (e) {
+	e.preventDefault();
+
+	// don't get crazy with the sizzle
+	var $el = $(this);
+	
+	// get the xapi-statement from the data atrribute
+	var stmt = $el.attr('data-xapi-statement');
+	
+	// determine if the statement is inline or referencing a JSON object
+	if (stmt.indexOf('{') == 0) {
+		var xstmt = $.parseJSON(stmt);
+	} else {
+		var xstmt = statements[stmt];
+	}
+
+	ADL.XAPIWrapper.sendStatement(xstmt, function(resp, obj) {
+		console.log(resp.status);
+		console.log(obj.id);
+	});
+});</pre>
+		</div>
+	   </div>
+	</div>
+	<!-- /tabs -->
+
+    <h2 id="notes" class="text-info">Notes</h2>
+    
+    <h3>Implementation in EPUB3</h3>
+    <p>Not all EPUB3 readers support scripting but if they do (<a href="https://chrome.google.com/webstore/detail/readium/fepbnnnkkadjhjahcafoaglimekefifl?hl=en-US" target="_blank">Readium</a> and <a href="http://calibre-ebook.com/download" target="_blank">Calibre</a> have been tested and <span class="text-success">confirmed to work</span>), they will send the statements. By keeping the javascript unobtrusive, we don't prevent the user from accessing content. An example of this behavior is possible by testing the one of these epubs on <a href="https://play.google.com/books/uploads" target="_blank">Google Play Books</a>, which currently disallows javascript execution.</p>
+    <p>The following epubs were generated with <a href="http://johnmacfarlane.net/pandoc/" target="_blank">pandoc</a> from markdown source.</p>
+    <ul>
+		<li><a href="xapi-data-book-minimal.epub">xapi-data-book-minimal.epub</a> [<a href="xapi-data-book-minimal.md">markdown source</a>]</li>
+		<li><a href="xapi-data-book.epub">xapi-data-book.epub</a> [<a href="xapi-data-book.md">markdown source</a>] (this includes a technical explanation an instructions to generate your own epub with pandoc)</li>
+    </ul>
+    
+    <h3>TODO</h3>
+    <ul>
+		<li>rewrite logic of JSON indexing via data-xapi-statement</li>
+		<li>Refactor javascript and develop jQuery plugin to handle all data-xapi-* attributes</li>
+		<li>Provide visual reports of statements</li>
+		<li>Allow users to setup their own LRS credentials</li>
+		<li>Provide more examples and break up into sections</li>
+		<li>Separate CSS styles out to separate file</li>
+		<li>Separate more JS into external files</li>
+		<li>Push to github when stable</li>
+		<li>Start versioning and tagging releases</li>
+		<li>Possible build system for compression</li>
+		<li>Statement builder and validator?</li>
+    </ul>
+    <p class="text-muted"><i class="glyphicon glyphicon-time
+"></i> Last Updated: 05/01/2014 by <a href="mailto:tyler.mulligan.ctr@adlnet.gov">Tyler Mulligan <i class="glyphicon glyphicon-send"></i></a></p>
+
+</div><!-- /.container -->
+		
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/xapiwrapper.min.js"></script>
+<script type="text/javascript" src="js/conf.js"></script>
+<script type="text/javascript" src="js/statements.js"></script>
+<script type="text/javascript" src="js/dataAttributeEvents.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var editor = ace.edit('editor');
+	editor.setOptions({
+		maxLines: 200
+	});
+	editor.getSession().setMode('ace/mode/javascript');
+
+	// A wrapper to process data-xapi-statements
+	function processStatement($el) {
+		var lrsn = $('#change-lrs a.active').text();
+		var $lrsr = $('#lrs-response');
+
+		// clean out the LRS response status
+		var $lrsr = $('#lrs-response');
+		$lrsr.html('').attr('class', '');
+		
+		// get the xapi-statement from the data atrribute
+		var stmt = $el.attr('data-xapi-statement');
+		
+		// determine if the statement is inline, using the editor, or referencing a JSON object
+		if ( stmt.indexOf('{') == 0 ) { // inline statement
+			var xstmt = $.parseJSON(stmt);
+		} else if ( stmt == 'custom-statement' ) { // editor
+			var xstmt = $.parseJSON(editor.getValue());
+		} else { // JSON object
+			var xstmt = statements[stmt];
+		}
+		
+		// Console log the index and then the selected statement from the JSON object
+		console.log("stmt: " + stmt);
+		console.log("xstmt: ");
+		console.log(xstmt);
+		console.log("verb: " + xstmt.verb.display['en-US']);
+
+		ADL.XAPIWrapper.sendStatement(xstmt, function(resp, obj) {
+			console.log("response status: " + resp.status);
+			console.log("response obj id: " + obj.id);
+
+			// update the status in the HTML
+			if (resp.status == 200) {
+				$lrsr.html("<b><em>" + xstmt.verb.display['en-US'] + "</em></b> statement sent successfully to " + lrsn).attr("class", "alert alert-success");
+			} /*else { // xapiwrapper.js throws a javascript alert
+				$lrsr.html("LRS rejected the statement").attr("class", "text-warning");
+			}*/
+		});
+
+		// Update the DOM to show what was sent
+		$('#statement').removeClass('prettyprinted'); // have to do this to reinitalize prettyprinting
+		$('#statement').html(JSON.stringify(xstmt, undefined, 2));
+		PR.prettyPrint();
+	};
+
+	$(function(){	
+
+		// apply default LRS config
+		ADL.XAPIWrapper.changeConfig(conf.adl);
+
+		// Handle click based sending of statements
+		$('#send-statement a, #send-custom-statement').click(function (e) {
+			e.preventDefault();
+			processStatement($(this));
+		});
+		
+		// you can change the LRS with this
+		$lrsa = $('#change-lrs a');
+		$lrsa.click(function() {
+			$lrsa.removeClass('active');
+			var $el = $(this);
+			var lrs = $el.attr('rel');
+			$el.addClass('active');
+			ADL.XAPIWrapper.changeConfig(conf[lrs]);
+		});
+
+		// I feel pretty
+		$("[data-toggle=tooltip]").tooltip();
+		prettyPrint();
+	});
+
+	// Custom Event Binding -- need to consolidate and abstract this
+	$(window).dataTriggers([
+	  {
+		dataAttribute: 'xapi-hover-event',
+		event: 'mouseover',
+		triggers: {
+			hover: function($el) { processStatement($el) }
+		}
+	  },
+	  {
+		dataAttribute:'xapi-change-event',
+		event:'change',
+		triggers: {
+		  change: function($el)
+		  {
+			var stmt = $el.val();
+			//console.log(stmt);
+			//console.log($el.children("option:selected").attr('data-xapi-statement'));
+			processStatement($el.children('option:selected'));
+		  }
+		}
+	  }
+	]);
+
+</script>
+
+</body>
+</html>
